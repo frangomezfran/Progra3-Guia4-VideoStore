@@ -48,10 +48,6 @@ public class Alquiler {
         return (this.fechaAlquiler.plusDays(this.diasAlquiler));
     }
 
-    public boolean getVigencia(){
-        return (LocalDate.now().isBefore(this.getFechaDevolucion()));
-    }
-
     public String generaBoleta (){
         return "Boleta [ "+this.cliente.getNombre()+" alquilo "+this.pelicula.getTitulo()+" el dia "+this.fechaAlquiler+" y la devuelve "+this.getFechaDevolucion()+" ]";
     }

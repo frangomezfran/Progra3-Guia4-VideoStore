@@ -9,7 +9,6 @@ public class Pelicula {
     private String audiencia; // Edad
     private String siglasPaisOrigen;
     private String descripcion;
-    private String id ;
 
     //---------------------- Constructor ----------------------
     public Pelicula(String genero, String titulo, String fechaLanzamiento, int duracionMinutos, String audiencia, String siglasPaisOrigen, String descripcion) {
@@ -20,7 +19,6 @@ public class Pelicula {
         this.audiencia = audiencia;
         this.siglasPaisOrigen = siglasPaisOrigen;
         this.descripcion = descripcion;
-        this.id = UUID.randomUUID().toString();
     }
 
     //---------------------- Genero ----------------------
@@ -79,13 +77,6 @@ public class Pelicula {
         this.descripcion = descripcion;
     }
 
-    //---------------------- ID ----------------------
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
 
     //---------------------- Metodos ----------------------
 

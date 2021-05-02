@@ -60,7 +60,6 @@ public class VideoStore {
 
         this.alquileres.add(0,alquiler);//los ultimos alquileres iran primero
 
-
         this.agregaClientes(alquiler.getCliente());
     }
 
@@ -87,9 +86,13 @@ public class VideoStore {
 
     public boolean getVigencia(Alquiler alquiler){
 
+        //Alquilo Nemo 123
+
+        //Inventario : Nemo 231 - Nemo 231 - Nemo 859
+
         for (Pelicula aux : this.inventario){
 
-            if(aux == alquiler.getPelicula())
+            if( aux.getId() == alquiler.getPelicula().getId() )
                 return false;//Si la pelicula que se alquilo esta en el inventario no hay vigencia
 
         }
