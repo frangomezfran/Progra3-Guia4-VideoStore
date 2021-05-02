@@ -5,8 +5,6 @@ public class Cliente {
     private String nombre;
     private String telefono;
     private String direccion;
-    //Sacar atributo alquiler del cliente
-    private Alquiler alquiler;//Quiza deberia inicializarlo en el constructor
 
     //---------------------- Constructor ----------------------
     public Cliente(String nombre, String telefono, String direccion) {
@@ -39,30 +37,18 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    //---------------------- Alquiler ----------------------
-    public Alquiler getAlquiler() {
-        return this.alquiler;
-    }
-    public void setAlquiler (Alquiler alquiler) {
-        this.alquiler = alquiler;
-    }
-
 
     //---------------------- Metodos ----------------------
 
-    public String imprimeCliente(){
+    @Override
+    public String toString(){
         return "Cliente [ Nombre : "+this.nombre+" | Telefono : "+this.telefono+
-                " | Direccion : "+this.direccion+" ]" ;
+                " | Direccion : "+this.direccion+" ]\n" ;
     }
     public Pelicula solicitaPelicula (Pelicula pelicula){
         return pelicula;
     }
-    //Devuelve la pelicula con getAlquiler, luego se setea a null
 
-    public Cliente devuelvePelicula (){
-       //return this.alquiler.getPelicula();
-        return this;
-    }
+    public Pelicula devuelvePelicula (Alquiler alquiler) { return alquiler.getPelicula(); }
 
-    //Deberia pagar el cliente
 }

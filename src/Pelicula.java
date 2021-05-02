@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 public class Pelicula {
 
     private String genero; //Podria hacer que los valores sean unicos pero nose como Accion,Aventura,Comedia,Drama,Horror,Documental
@@ -7,7 +9,7 @@ public class Pelicula {
     private String audiencia; // Edad
     private String siglasPaisOrigen;
     private String descripcion;
-    //private int popularidad;
+    private String id ;
 
     //---------------------- Constructor ----------------------
     public Pelicula(String genero, String titulo, String fechaLanzamiento, int duracionMinutos, String audiencia, String siglasPaisOrigen, String descripcion) {
@@ -18,7 +20,7 @@ public class Pelicula {
         this.audiencia = audiencia;
         this.siglasPaisOrigen = siglasPaisOrigen;
         this.descripcion = descripcion;
-        this.popularidad = 0 ;
+        this.id = UUID.randomUUID().toString();
     }
 
     //---------------------- Genero ----------------------
@@ -77,18 +79,15 @@ public class Pelicula {
         this.descripcion = descripcion;
     }
 
-    //---------------------- Popularidad ----------------------
-    public int getPopularidad() {
-        return popularidad;
+    //---------------------- ID ----------------------
+    public String getId() {
+        return id;
     }
-    public void setPopularidad(int popularidad) {
-        this.popularidad = popularidad;
+    public void setId(String id) {
+        this.id = id;
     }
 
     //---------------------- Metodos ----------------------
-    public void aumentaPopularidad(){
-        this.popularidad++;
-    }
 
 
 }

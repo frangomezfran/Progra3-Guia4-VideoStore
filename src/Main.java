@@ -24,29 +24,35 @@ public class Main {
             robertoStore.agregaPeliculasAlInventario(psicosis);
             robertoStore.agregaPeliculasAlInventario(ourPlanet);
         }
-        //Creamos Clientes
+
+        //Creo Cliente
         Cliente francoCliente = new Cliente("Franco Gomez","2236010566","Casa de Fran");
-        Cliente pepeCliente = new Cliente("Pepe Lopez","2238562844","Casa de Pepe");
-        Cliente leniCliente = new Cliente("Leni Gomez","2231231231","Casa de Leni");
 
         // Franco solicita al robertoStore si esta la pelicula nemo y si hay stock
-        boolean peliculaEsta = robertoStore.buscaEnInventario( francoCliente.solicitaPelicula ( nemo ) );
-
         //Si esta la pelicula le pedimos los datos al cliente y la alquilamos
-        if ( peliculaEsta ) {
 
-            //Necesito crear aca adentro el alquiler dentro del cliente
-            Alquiler alquilerFran = new Alquiler( francoCliente,francoCliente.solicitaPelicula ( nemo ) ); // Instanciamos un alquiler con la pelicula que pide el cliente
+        if ( robertoStore.buscaEnInventario( francoCliente.solicitaPelicula ( nemo ) ) ) {
 
-            robertoStore.agregaClientes(francoCliente);
+            // Instancio un alquiler con la pelicula que pide el cliente
+            Alquiler alquilerFran = new Alquiler( francoCliente,francoCliente.solicitaPelicula ( nemo ) , 7);
 
-            System.out.println(robertoStore.darPeliculayDaBoleta(francoCliente));
+            //Agrego el alquiler al local y el cliente al mismo tiempo
+            robertoStore.agregaAlquilerYCliente(alquilerFran);
 
-            System.out.println(robertoStore.imprimeAlquileresVigentes());
+            //Le da la pelicula al cliente
+            robertoStore.remuevePeliculaInventario(alquilerFran);
 
-            robertoStore.recibePelicula( francoCliente.devuelvePelicula() );
+            System.out.println("Alquiler hecho, Creando boleta... = "+alquilerFran.generaBoleta());
 
-            System.out.println(robertoStore.imprimeAlquileresVigentes());
+            System.out.println("\nAlquileres Vigentes: \n"+robertoStore.imprimeAlquileresVigentes());
+            System.out.println("\nUltimos 10 alquileres de Clientes:\n"+robertoStore.imprimeUltimos10AlquileresCadaCliente());
+
+            //Devuelve la pelicula
+            robertoStore.agregaPeliculasAlInventario(francoCliente.devuelvePelicula(alquilerFran));
+
+            System.out.println("\nAlquileres Vigentes: \n"+robertoStore.imprimeAlquileresVigentes());
+            System.out.println("\nUltimos 10 alquileres de Clientes:\n"+robertoStore.imprimeUltimos10AlquileresCadaCliente());
+
 
 
 

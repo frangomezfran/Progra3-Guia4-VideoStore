@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class VideoStore {
 
@@ -45,36 +47,21 @@ public class VideoStore {
 
         if(!this.clientes.isEmpty()) {
 
-            boolean clienteRegistrado = false;
-
-            for (Cliente aux : this.clientes) {
-
-                if (aux.getTelefono().equals(cliente.getTelefono())) // Un dni estaria mejor
-                {
-                    clienteRegistrado = true;
-                    break;
-                }
-
-            }
-
-            if(!clienteRegistrado) // Si el cliente no esta dentro de la lista se agregará
+            if(Collections.frequency(this.clientes,cliente) == 0)
                 this.clientes.add(cliente);
 
         }else{
             this.clientes.add(cliente);
         }
 
-        addListaAlquileres(cliente.getAlquiler());
     }
 
-    public void addListaAlquileres(Alquiler alquiler){
-        this.alquileres.add(alquiler);
-    }
+    public void agregaAlquilerYCliente(Alquiler alquiler){
 
-    public void cambiaVigenciaListaDeAlquileres(Alquiler alquiler){
+        this.alquileres.add(0,alquiler);//los ultimos alquileres iran primero
 
-        int indexDeAlquiler = this.alquileres.indexOf(alquiler);//Cambiamos la lista de alquileres
-        this.alquileres.get(indexDeAlquiler).setVigente(false);
+
+        this.agregaClientes(alquiler.getCliente());
     }
 
     public boolean buscaEnInventario (Pelicula pelicula){
@@ -92,66 +79,63 @@ public class VideoStore {
 
     }
 
-    public String darPeliculayDaBoleta (Cliente cliente) { //Este metodo se hace luego de buscaInventario
+    public void remuevePeliculaInventario (Alquiler alquiler) { //Este metodo se hace luego de buscaInventario
 
-        this.inventario.remove(cliente.getAlquiler().getPelicula());
-
-        //Genero boleta y la retorno
-        return this.clientes.get( this.clientes.size()-1 ).getAlquiler().generaBoleta();
+        this.inventario.remove(alquiler.getPelicula());
 
     }
 
-    public void recibePelicula (Cliente cliente) {
+    public boolean getVigencia(Alquiler alquiler){
 
-        this.inventario.add(cliente.getAlquiler().getPelicula()); //Podria ponerle el index para q mi inventario este prolijo
+        for (Pelicula aux : this.inventario){
 
-        int indexDelCliente = this.clientes.indexOf(cliente) ;
-        this.clientes.get(indexDelCliente).getAlquiler().terminaAlquiler();//Cliente de la lista a editar su alquiler
+            if(aux == alquiler.getPelicula())
+                return false;//Si la pelicula que se alquilo esta en el inventario no hay vigencia
 
-        cambiaVigenciaListaDeAlquileres(cliente.getAlquiler());
+        }
 
-
+        return true;//Si la pelicula que se alquilo no esta en el inventario hay vigencia
     }
 
     public String imprimeAlquileresVigentes (){
+
         String alquileresVigentes="";
 
-        for (Alquiler aux : this.alquileres){
+        for (Alquiler alquiler : this.alquileres){
 
-            if (aux.isVigente())
-              alquileresVigentes += aux.imprimeAlquiler();
+            if ( this.getVigencia(alquiler) )
+              alquileresVigentes += alquiler.toString();
         }
 
         return alquileresVigentes;
 
     }
 
-    public String imprimeDevolucionesHoy(){
-
-        String devolucionesHoy="";
+    public void imprimeDevolucionesHoy(){
 
         for (Alquiler aux : this.alquileres){
 
-            if (LocalDate.now().equals(aux.getFechaDevolucion()))
-                devolucionesHoy += aux.imprimeAlquiler();
+            if (aux.getFechaAlquiler()!=null)
+                aux.toString();
         }
 
-        return devolucionesHoy;
     }
 
-    public void imprimeUltimos10AlquileresCadaCliente (){ //Pasar por parametro el cliente
+    public String imprimeUltimos10AlquileresCadaCliente (){ //Pasar por parametro el cliente
 
         int i = 0;
 
+        String aImprimir="";
+
         for (Cliente cliente : this.clientes){
 
-            cliente.imprimeCliente(); //Imprimo al cliente
+            aImprimir+=cliente.toString(); //Imprimo al cliente
 
             for (Alquiler alquiler : this.alquileres){
 
                 if (alquiler.getCliente().getTelefono().equals(cliente.getTelefono())  && i < 10){ //Ordenar los alquileres por fecha
 
-                    alquiler.imprimeAlquiler();
+                    aImprimir+=alquiler.toString();
                     i++;
 
                 }
@@ -161,6 +145,8 @@ public class VideoStore {
             i = 0;
 
         }
+
+        return aImprimir;
 
 
     }
