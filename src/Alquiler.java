@@ -7,14 +7,17 @@ public class Alquiler {
     private LocalDate fechaAlquiler = null;
     private Pelicula pelicula;
     private int diasAlquiler = 0;
+    private boolean vigencia; //Con este atributo podre generar un historial en la lista de alquileres del VideoStore
 
     //---------------------- Constructor ----------------------
-    public Alquiler(Cliente cliente, Pelicula pelicula, int diasAlquiler) { //Si se instancia el Alquiler se alquila la pelicula
+
+    public Alquiler(Cliente cliente, Pelicula pelicula, int diasAlquiler, LocalDate fechaAlquiler) { //Si se instancia el Alquiler se alquila la pelicula
 
         this.cliente = cliente;
         this.pelicula = pelicula;
         this.diasAlquiler = diasAlquiler;
-        this.fechaAlquiler = LocalDate.now();
+        this.fechaAlquiler = fechaAlquiler;
+        this.vigencia = true;
     }
 
     //---------------------- Cliente ----------------------
@@ -41,6 +44,20 @@ public class Alquiler {
         this.pelicula = pelicula;
     }
 
+    //---------------------- Dias Alquiler ----------------------
+    public int getDiasAlquiler() {
+        return diasAlquiler;
+    }
+    public void setDiasAlquiler(int diasAlquiler) {
+        this.diasAlquiler = diasAlquiler;
+    }
+    //---------------------- Vigencia ----------------------
+    public boolean getVigencia() {
+        return vigencia;
+    }
+    public void setVigencia(boolean vigencia) {
+        this.vigencia = vigencia;
+    }
 
     //---------------------- Metodos ----------------------
 

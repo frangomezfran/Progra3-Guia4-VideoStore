@@ -9,9 +9,11 @@ public class Pelicula {
     private String audiencia; // Edad
     private String siglasPaisOrigen;
     private String descripcion;
+    private int stock;
+
 
     //---------------------- Constructor ----------------------
-    public Pelicula(String genero, String titulo, String fechaLanzamiento, int duracionMinutos, String audiencia, String siglasPaisOrigen, String descripcion) {
+    public Pelicula(String genero, String titulo, String fechaLanzamiento, int duracionMinutos, String audiencia, String siglasPaisOrigen, String descripcion, int stock) {
         this.genero = genero;
         this.titulo = titulo;
         this.fechaLanzamiento = fechaLanzamiento;
@@ -19,6 +21,7 @@ public class Pelicula {
         this.audiencia = audiencia;
         this.siglasPaisOrigen = siglasPaisOrigen;
         this.descripcion = descripcion;
+        this.stock = stock;
     }
 
     //---------------------- Genero ----------------------
@@ -77,8 +80,23 @@ public class Pelicula {
         this.descripcion = descripcion;
     }
 
+    //---------------------- Stock ---------------------------
+    public int getStock(){
+        return this.stock;
+    }
+    public void setStock(int stock){
+        this.stock = stock ;
+    }
 
     //---------------------- Metodos ----------------------
+
+    public void descuentaStock(){
+        this.stock--;
+    }
+
+    public void aumentaStock(){
+        this.stock++;
+    }
 
 
 }

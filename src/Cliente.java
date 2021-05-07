@@ -45,10 +45,8 @@ public class Cliente {
         return "Cliente [ Nombre : "+this.nombre+" | Telefono : "+this.telefono+
                 " | Direccion : "+this.direccion+" ]\n" ;
     }
-    public Pelicula solicitaPelicula (Pelicula pelicula){
-        return pelicula;
-    }
 
-    public Pelicula devuelvePelicula (Alquiler alquiler) { return alquiler.getPelicula(); }
+    //Estos metodos los hago para que el main tenga mas coherencia
+    public String solicitaPelicula (String tituloPelicula){ return tituloPelicula; }
 
 }
